@@ -3,6 +3,8 @@
 #define DEBUG_MODE
 
 TDA7418::TDA7418() {
+	
+	qWarning("TDA7418 Init ");
     for(int i = 0; i <= EQ_Band_Treble; i++){
         setEqBandLevel((Audio_EQ_Bands) i, 0);
     }
@@ -10,12 +12,15 @@ TDA7418::TDA7418() {
         setOutputChannelLevel((Audio_Output_Channels) i, 100);
     }
     setMute(false);
-    
+    //setVolume(90);
     setInput(Input_3);
     setInputGain(0);
+	writeByte(TDA7419_SPECTRUM, 0b11001010);
+    writeByte(TDA7419_MIX_G_EFF, 0b11110000);
 }
 
 void TDA7418::setInput(Audio_Input_Channels channel) {
+	qWarning("TDA7418 setInput");
     m_inputSelectorData &= 0b11111000;
     switch (channel)
     {
@@ -35,10 +40,15 @@ void TDA7418::setInput(Audio_Input_Channels channel) {
     default:
         return;
     }
+	
+    writeByte(TDA7419_INPUT2, 0b00000101);
+    //qWarning("TDA7418 setInput %d",m_inputSelectorData);
+	//qWarning("Error opening I2C device %s : %s", device, strerror(errno));
     return writeByte(TDA7418_Register_Input_Selector, m_inputSelectorData);
 
 }
 void TDA7418::setVolume(int volume) {
+	qWarning("TDA7418 setVolume");
     if(volume > 115 || volume < 0){
         qWarning("Invalid volume level");
         return;
@@ -51,26 +61,32 @@ void TDA7418::setVolume(int volume) {
     } else {
         vol = volume - 100;
     }
+	qWarning("TDA7418 setVolume %d",vol);
+	
     return writeByte((char)TDA7418_Register_Volume, 0b10000000 | vol);
 }
 
 void TDA7418::setMute(bool mute) {
     unsigned char muteSettings = 0b01111100 | !mute;
+	qWarning("TDA7418 setMute %d",muteSettings);
     return writeByte(TDA7418_Register_Soft_Mute, muteSettings);
 }
 
 void TDA7418::setInputGain(int level) {
+	
     if (level > 15 || level < 0) {
 		return;
 	}
 
     m_inputSelectorData &= 0b10000111;
     m_inputSelectorData |= level << 3;
-
+	//m_inputSelectorData |= 0x80;
+	qWarning("TDA7418 setInputGain %d",m_inputSelectorData);
     return writeByte(TDA7418_Register_Input_Selector, m_inputSelectorData);
 
 }
 void TDA7418::setOutputChannelLevel(Audio_Output_Channels channel, int level) {
+    qWarning("TDA7418 setOutputChannelLevel1 %02d",level);
     int i2cRegister = 0;
 
     switch (channel)
@@ -104,14 +120,20 @@ void TDA7418::setOutputChannelLevel(Audio_Output_Channels channel, int level) {
     int vol = 0;
     if (level < 100){
         vol = 96 - (level * ratio);
+        qWarning() << "Invalid2"<<vol;
     } else {
-        vol = level - 100;
-    }
+        vol = level * ratio - 80;
+        qWarning() << "Invalid1"<<vol;
+    }/**/
 
+
+
+    qWarning("TDA7418 setOutputChannelLevel %x",  vol);
     return writeByte((char)i2cRegister, 0b10000000 | vol);
 
 }
 void TDA7418::setEqBandLevel(Audio_EQ_Bands band, int level) {
+	qWarning("TDA7418 setEqBandLevel");
     int i2cRegister = 0;
     char register_data = 0b11100000;
 
@@ -137,12 +159,13 @@ void TDA7418::setEqBandLevel(Audio_EQ_Bands band, int level) {
 	}
 
     if (level >= 0) {
-        register_data |= 31 - level;
+        register_data |= 16 + level;
+        qWarning("Invalid2 %d",level + 16);
     }
     else {
-        register_data |= level + 15;
+        register_data |= level + 30;
     }
-
+    qWarning("TDA7418 setEqBandLevel 0x%02x",register_data);
     return writeByte((char)i2cRegister, register_data);
 
 }
@@ -150,8 +173,8 @@ void TDA7418::setEqBandLevel(Audio_EQ_Bands band, int level) {
 void TDA7418::writeBytes(char registerAddress, int len, unsigned char* byteBuffer)
 {
     int fd;
-
-    const char *device = "/dev/i2c-1";
+	qWarning("TDA7418 writeBytes");
+    const char *device = "/dev/i2c-7";
 
     fd = open(device, O_RDWR);
     if (fd < 0)
@@ -176,8 +199,8 @@ void TDA7418::writeBytes(char registerAddress, int len, unsigned char* byteBuffe
 void TDA7418::writeByte(char registerAddress, unsigned char byteBuffer)
 {
     int fd;
-
-    const char *device = "/dev/i2c-1";
+	qWarning("TDA7418 writeByte");
+    const char *device = "/dev/i2c-7";
 
     fd = open(device, O_RDWR);
     if (fd < 0)

@@ -3,5 +3,6 @@
         <file>SoundSettings.qml</file>
         <file>main.qml</file>
         <file>Volume.qml</file>
+        <file>SoundSettingsConf.qml</file>
     </qresource>
 </RCC>

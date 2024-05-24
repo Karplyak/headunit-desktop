@@ -13,21 +13,26 @@ Item {
 
     ListModel {
         id: stationModel
-        ListElement {name:"Radio 1";favourite:true;frequency:87.9}
-        ListElement {name:"KISS";favourite:false;frequency:107}
-        ListElement {name:"Classic FM";favourite:false;frequency:102.4}
-        ListElement {name:"Sunrise Radio";favourite:false;frequency:93.7}
-        ListElement {name:"Jazz FM";favourite:false;frequency:95.6}
-        ListElement {name:"Fun Kids";favourite:true;frequency:89.2}
-        ListElement {name:"Magic Chilled";favourite:false;frequency:88.1}
-        ListElement {name:"Capital";favourite:false;frequency:97.8}
-        ListElement {name:"UndergroundFm";favourite:true;frequency:96.3}
-        ListElement {name:"Kool London";favourite:true;frequency:107}
-        ListElement {name:"Bassjunkees.com";favourite:false;frequency:96.7}
-        ListElement {name:"BassPort FM";favourite:false;frequency:91.6}
-        ListElement {name:"Rude FM";favourite:false;frequency:100.1}
-        ListElement {name:"Revolution DJ";favourite:false;frequency:99.3}
-        ListElement {name:"Street Certified Radio";favourite:true;frequency:106.2}
+        ListElement {name:"Radio Pershe";favourite:true;frequency:88.2}
+        ListElement {name:"Radio ROX";favourite:true;frequency:89.2}
+        ListElement {name:"Galychyna";favourite:false;frequency:89.7}
+        ListElement {name:"KISS FM";favourite:false;frequency:91.1}
+        ListElement {name:"MELODIA FM";favourite:false;frequency:91.5}
+        ListElement {name:"Radio Pyatnycya";favourite:false;frequency:92}
+        ListElement {name:"Nostalgie";favourite:false;frequency:97}
+        ListElement {name:"Lviv FM";favourite:false;frequency:100.8}
+        ListElement {name:"Sokal FM";favourite:false;frequency:101.1}
+        ListElement {name:"Craina";favourite:false;frequency:101.3}
+        ListElement {name:"HIT FM";favourite:true;frequency:101.7}
+        ListElement {name:"Maximum Fm";favourite:true;frequency:102.1}
+        ListElement {name:"Radio Promin";favourite:false;frequency:102.5}
+
+        ListElement {name:"Duzhe Radio";favourite:false;frequency:104.3}
+        ListElement {name:"Radio JAZZ";favourite:false;frequency:105.4}
+        ListElement {name:"Radio JAZZ";favourite:false;frequency:105.4}
+
+        ListElement {name:"Lux FM Lviv";favourite:false;frequency:104.7}
+        ListElement {name:"UKR 1 Radio";favourite:true;frequency:103.3}
     }
 
     Rectangle {
@@ -155,5 +160,7 @@ Item {
 
     }
 
-
+    Component.onCompleted: {
+        setPersonalInfoValue();
+    }
 }

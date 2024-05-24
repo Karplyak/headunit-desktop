@@ -5,6 +5,7 @@ TARGET = $$qtLibraryTarget(audio-processor-plugin)
 DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += $${PWD}/../../includes
 DESTDIR = $${OUT_PWD}/../../plugins
+QML_IMPORT_PATH +=$${PWD}/../../themes/default-theme/qml
 
 include("../../config.pri")
 

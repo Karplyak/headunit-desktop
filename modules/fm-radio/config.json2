@@ -1,0 +1,16 @@
+{
+    "name":"FMRadio",
+    "menu":{
+        "text":"Radio",
+        "source":"qrc:/Radio/RadioLayout.qml",
+        "image": "icons/svg/radio-waves.svg",
+        "color":"#E91E63"
+    },
+    "config":{
+        "name":"Radio",
+        "text":"FMRadio Settings",
+        "source":"qrc:/Radio/RadioLayout.qml",
+        "image": "icons/svg/radio-waves.svg",
+        "section":"Examples"
+    }
+}

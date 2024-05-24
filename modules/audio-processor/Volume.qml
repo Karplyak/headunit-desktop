@@ -43,6 +43,6 @@ ThemeRoot {
 
 /*##^##
 Designer {
-D{i:0;autoSize:true;formeditorColor:"#808080";height:480;width:640}
+    D{i:0;autoSize:true;formeditorColor:"#808080";height:480;width:640}
 }
 ##^##*/

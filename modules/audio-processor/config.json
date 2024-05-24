@@ -2,6 +2,7 @@
     "name":"AudioProcessorPlugin",
     "label":"Audio Processor",
     "source": "qrc:/AudioProcessor/main.qml",
+    "icon": "qrc:/qml/icons/air-conditioning.png",
     "config":{
         "type":"items",
         "description":"Settings Menu Test",

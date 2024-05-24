@@ -1,4 +1,4 @@
-#include "sampleplugin.h"
+#include "navitplugin.h"
 
 SamplePlugin::SamplePlugin(QObject *parent) : QObject (parent)
 {

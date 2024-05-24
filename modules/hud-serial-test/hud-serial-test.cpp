@@ -111,6 +111,8 @@ void HUDSerialTest::setAudioParameter(QString parameter, int value){
     QVariantMap parameterMap;
     parameterMap["key"] = parameter;
     parameterMap["value"] = value;
+    //emit action("AudioProcessorPlugin::VolumeUp", 0);
+    emit action("AudioProcessorPlugin::setAudioParameter",parameter);
     emit action("HUDSerialPlugin::AudioControl", parameterMap);
 }
 void HUDSerialTest::setZoneParameter(QString zone, QString parameter, QVariant value) {

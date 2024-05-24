@@ -4,5 +4,7 @@
         <file>Radio/RadioDrawerItem.qml</file>
         <file>Radio/RadioLayout.qml</file>
         <file>Radio/Tuner.qml</file>
+        <file>Radio/main.qml</file>
+        <file>Radio/settings.qml</file>
     </qresource>
 </RCC>

@@ -1,11 +1,12 @@
-import QtQuick 2.6
+import QtQuick 2.9
 import QtGraphicalEffects 1.0
-import QtQuick.Layouts 1.0
-import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.2
 
+import HUDPlugins 1.0
 import HUDTheme 1.0
 
-Item {
+ThemeRoot {
     id: __cclayout
     anchors.fill: parent
     property int left_seat_heat_rate: 0
@@ -52,6 +53,49 @@ Item {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
 
+                RowLayout {
+                    id: signalStrength
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+                    anchors.topMargin: 15
+                    anchors.rightMargin: 15
+                    spacing: 2
+
+                    Accessible.name: qsTr("Signal noise ratio: " + pluginContext.snr )
+
+                    Rectangle{
+                        height: 4
+                        width: 4
+                        color: (pluginContext.snr > 25) ? "green" : "dimgrey"
+                        Accessible.ignored: true
+                    }
+                    Rectangle{
+                        height: 8
+                        width: 4
+                        color: (pluginContext.snr > 45) ? "green" : "dimgrey"
+                        Accessible.ignored: true
+                    }
+                    Rectangle{
+                        height: 12
+                        width: 4
+                        color: (pluginContext.snr > 70) ? "green" : "dimgrey"
+                        Accessible.ignored: true
+                    }
+                    Rectangle{
+                        height: 16
+                        width: 4
+                        //color: (pluginContext.FMRadio.snr > 71) ? "green" : "dimgrey"
+                        color: (pluginContext.snr > 95) ? "green" : "dimgrey"
+                        Accessible.ignored: true
+                    }
+
+                    Rectangle{
+                        height: 20
+                        width: 4
+                        color: (pluginContext.snr > 120) ? "green" : "dimgrey"
+                        Accessible.ignored: true
+                    }
+                }
 
                 ModeSwitch {
                     id: modeSwitch1
@@ -62,14 +106,14 @@ Item {
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     width:height*2
-                    rightText: "DAB"
+                    rightText: "OFF"
                     leftText: "FM"
                     sliderColor: "#263238"
                 }
 
                 Text {
                     color: "#ffffff"
-                    text: activeStation
+                    text: pluginContext.title.trim()
                     anchors.right: spacer1.left
                     anchors.rightMargin: 0
                     anchors.left: modeSwitch1.right
@@ -104,7 +148,7 @@ Item {
                 Layout.fillHeight: true
                 Text {
                     color: "#ffffff"
-                    text: "Now playing: Skrillex - Purple Lamborghini"
+                    text: pluginContext.text.trim()
                     verticalAlignment: Text.AlignTop
                     font.family: ralewayRegular.name
                     horizontalAlignment: Text.AlignHCenter
@@ -198,7 +242,10 @@ Item {
                             MouseArea {
                                 anchors.fill: parent
 
-                                onClicked:tuner.moveFreqWith(1)
+                                onClicked:{
+                                    tuner.moveFreqWith(1)
+                                    //pluginContext.openOverlay()
+                                }
                             }
                         }
                     }
@@ -277,6 +324,7 @@ Item {
         listTopMargin:top_menu.height
         onItemClicked: {
             tuner.moveToFreq(frequency);
+            //pluginContext.moveToFreq(frequency*100);
             changeState();
             __cclayout.activeStation = stationName;
         }
@@ -322,5 +370,23 @@ Item {
         anchors.right: parent.right
         anchors.rightMargin: 0
         onMenuClicked: changeState();
+    }
+    Connections{
+        target: pluginContext
+        Component.onCompleted: {
+            //pluginContext.
+            //tuner.moveToFreq(104.7); pluginContext.snr
+            //frequency = pluginContext.lfrequency/100;
+            tuner.moveToFreq(pluginContext.lfrequency/100);
+                    //getFreq();
+            //tuner.changed(frequency);
+            //(frequency*100);
+        }
+
+        onShowErrorMessage:{
+        }
+
+        onShowInfoMessage:{
+        }
     }
 }

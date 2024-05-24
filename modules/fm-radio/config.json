@@ -1,9 +1,39 @@
 {
-    "name":"FMRadio",
+    "name": "FMRadio",
+	"source": "qrc:/Radio/RadioLayout.qml",
+        "icon": "qrc:/qml/icons/svg/radio-waves.svg",
+	"label": "FM",
     "menu":{
-        "text":"Radio",
-        "source":"qrc:/Radio/RadioLayout.qml",
-        "image": "icons/svg/radio-waves.svg",
         "color":"#E91E63"
+    },    
+	"config":{
+        "type":"loader",
+		"source": "qrc:/Radio/settings.qml",
+		"settings": [
+		  {
+			"name": "sensor_model",
+			"type": "string"
+		  },
+		  {
+			"name": "i2c_port",
+			"type": "string"
+		  },
+		  {
+			"name": "refresh_interval",
+			"type": "uint",
+			"defaultValue": 0
+		  },
+		  {
+			"name": "day_threshold",
+			"type": "uint",
+			"defaultValue": 1000
+		  },
+		  {
+			"name": "night_threshold",
+			"type": "uint",
+			"defaultValue": 500
+		  }
+		]
     }
+		
 }

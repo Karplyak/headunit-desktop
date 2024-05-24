@@ -102,7 +102,7 @@ void AudioProcessorPlugin::openOverlay()
 }
 
 void AudioProcessorPlugin::setAudioParameter(QString parameter, int value)
-{
+{qDebug() << "Set audio parameter" << parameter << value;
     if(!m_audioBackend){
         qWarning() << "Audio processor doesn't exist";
         return;
@@ -119,9 +119,12 @@ void AudioProcessorPlugin::setAudioParameter(QString parameter, int value)
             return;
         }
         if (value < 0){
-            leftLevel = 100 + value;
+            //leftLevel = 100 + value;
+            leftLevel=100+value*6.67;
         } else if (value > 0) {
-            rightLevel = 100 - value;
+            //rightLevel = 100 - value;
+            rightLevel=100-value*6.67;
+
         }
         m_audioBackend->setOutputChannelLevel(AudioProcessorInterface::Front_Left, leftLevel);
         m_audioBackend->setOutputChannelLevel(AudioProcessorInterface::Front_Right, rightLevel);

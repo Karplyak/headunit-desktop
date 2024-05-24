@@ -30,6 +30,12 @@ Item {
             slideUpdate();
         }
     }
+    function moveToFreqBack(freq){
+        if(freq >= freqRealRangeStart && freq <= freqRealRangeEnd){
+            tuneSlider.x = slideXtoFreq(freq);
+            slideUpdate();
+        }
+    }
     function moveFreqWith(amount){
         var freq = getFreq() + 1 * (amount/Math.abs(amount));
         moveToFreq(freq);
@@ -40,6 +46,7 @@ Item {
     function slideUpdate(){
         frequency = getFreq();
         tuner.changed(frequency)
+        pluginContext.moveToFreq(frequency*100);
     }
 
     FontLoader{id:ralewayRegular; source:"qrc:/qml/fonts/Raleway-Regular.ttf"}

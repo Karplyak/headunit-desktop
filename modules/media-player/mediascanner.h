@@ -15,6 +15,7 @@
 #include <taglib/taglib.h>
 #include <taglib/tag.h>
 #include <taglib/fileref.h>
+#include <taglib/taglib_config.h>
 #include <taglib/tpropertymap.h>
 #include <taglib/id3v2tag.h>
 
