@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Pult">
+        <file>settings.qml</file>
+    </qresource>
+</RCC>
