@@ -11,11 +11,11 @@ This software is currently under active development and lot of the features are 
 
  - Media player with a media library and media scanner
  - Android Auto™ client
- - DAB radio
+ - DAB radio (disabled)
+ - FM Radio
+ - back cam (disabled)
 
 Proposed features:
-
- - FM Radio
  - CAN bus sniffer (depending on how much control different modules of the car allow and how much information, such as A/C steering wheel controls, different gauges and sensor data) with a customizable profile for each car.
 
 The GUI for some of the proposed features is already there. For screenshots of the current state of the GUI go to the [screenshots page](https://github.com/viktorgino/headunit-desktop/wiki/Screenshots) in the Wiki.
