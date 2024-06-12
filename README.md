@@ -14,6 +14,7 @@ This software is currently under active development and lot of the features are 
  - DAB radio (disabled)
  - FM Radio
  - back cam (disabled)
+ - Pult (disabled)
 
 Proposed features:
  - CAN bus sniffer (depending on how much control different modules of the car allow and how much information, such as A/C steering wheel controls, different gauges and sensor data) with a customizable profile for each car.
