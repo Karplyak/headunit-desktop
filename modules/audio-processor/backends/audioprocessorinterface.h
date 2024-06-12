@@ -35,5 +35,6 @@ public:
     virtual void setInputGain(int level) = 0;
     virtual void setOutputChannelLevel(Audio_Output_Channels channel, int level) = 0;
     virtual void setEqBandLevel(Audio_EQ_Bands band, int level) = 0;
+	bool isMute = false;
 };
 #endif // AUDIOPROCESSORINTERFACE_H

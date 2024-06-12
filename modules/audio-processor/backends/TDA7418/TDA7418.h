@@ -88,13 +88,13 @@ public:
     void setInputGain(int level) override;
     void setOutputChannelLevel(Audio_Output_Channels channel, int level) override;
     void setEqBandLevel(Audio_EQ_Bands band, int level) override;
-
-
+	
 private :
     QString m_i2cDevice = "/dev/i2c-7";
     void writeByte(char registerAddress, unsigned char byteBuffer);
     void writeBytes(char registerAddress, int len, unsigned char* byteBuffer);
     char m_inputSelectorData = 0;
+	
 };
 
 #endif

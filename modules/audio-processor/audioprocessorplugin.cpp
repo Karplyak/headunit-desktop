@@ -19,6 +19,7 @@ void AudioProcessorPlugin::init()
 }
 
 void AudioProcessorPlugin::actionMessage(QString id, QVariant message){
+	qDebug() << "AudioProcessorPlugin::actionMessage ID " << id  << " Message "<<  message;
     if(id == "Sound"){
         if(m_soundSettingsState == DefaultState){
             openOverlay();
@@ -81,7 +82,15 @@ void AudioProcessorPlugin::actionMessage(QString id, QVariant message){
         map["source"] = "qrc:/AudioProcessor/Volume.qml";
 
         emit action("GUI::OpenOverlay", map);
-    }
+    }  else if(id == "Mute"){
+		m_audioBackend->isMute=!m_audioBackend->isMute;
+		m_audioBackend->setMute(m_audioBackend->isMute);
+	}  else if(id == "setAudioParameter") {
+		QVariantMap map = message.toMap();
+		//QVariantList va_list = message.toList();
+		//qDebug() << "!!!!!!!!!!!AudioProcessorPlugin::setAudioParameterID " << id  << " Message "<<  map["value"]; 
+		setAudioParameter(map["key"].toString(), map["value"].toInt());
+	}
 }
 
 void AudioProcessorPlugin::settingsChanged(const QString &key, const QVariant &value){
@@ -102,7 +111,8 @@ void AudioProcessorPlugin::openOverlay()
 }
 
 void AudioProcessorPlugin::setAudioParameter(QString parameter, int value)
-{qDebug() << "Set audio parameter" << parameter << value;
+{
+			qDebug() << "AudioProcessorPlugin::Set audio parameter" << parameter << value;
     if(!m_audioBackend){
         qWarning() << "Audio processor doesn't exist";
         return;
@@ -148,7 +158,44 @@ void AudioProcessorPlugin::setAudioParameter(QString parameter, int value)
             return;
         }
         m_audioBackend->setEqBandLevel(AudioProcessorInterface::EQ_Band_Treble, value);
-    } else {
+    } else if(parameter == "SetInput"){
+        if (value < 0 || value > 3) {
+            return;
+        }
+		switch (value)
+		{
+		case 0:
+			m_audioBackend->setInput(AudioProcessorInterface::Input_1);
+			break;
+		case 1:
+			m_audioBackend->setInput(AudioProcessorInterface::Input_2);;
+			break;
+		case 2:
+			m_audioBackend->setInput(AudioProcessorInterface::Input_3);;
+			break;
+		case 3:
+			m_audioBackend->setInput(AudioProcessorInterface::Input_4);;
+			break;
+
+		default:
+			return;
+		}
+
+	} else if(parameter == "SetInputGain"){
+        if (value < 0 || value > 15) {
+            return;
+        }
+		m_audioBackend->setInputGain(value);
+	} /*else if(parameter == "SetMute"){
+
+		m_audioBackend->setMute(!m_audioBackend->isMute);
+	}   */
+
+
+
+
+
+	else {
         return;
     }
     qDebug() << "Set audio parameter" << parameter << value;

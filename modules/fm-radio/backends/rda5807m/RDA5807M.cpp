@@ -92,7 +92,7 @@ void RDA5807M::getStatusRegisters()
     Wire.endTransmission();*/
     int fd;
         //qWarning("RDA5807M::getStatus");
-        const char *device = "/dev/i2c-7";
+        const char *device = "/dev/i2c-2";
 
         fd = open(device, O_RDWR);
         if (fd < 0)
@@ -196,7 +196,7 @@ void *RDA5807M::getStatus(uint8_t reg)
 
     int fd;
         //qWarning("RDA5807M::getStatus");
-        const char *device = "/dev/i2c-7";
+        const char *device = "/dev/i2c-2";
 
         fd = open(device, O_RDWR);
         if (fd < 0)
@@ -266,7 +266,7 @@ int result = 0;
 
     int fd;
         qWarning("RDA5804m writeByte");
-        const char *device = "/dev/i2c-7";
+        const char *device = "/dev/i2c-2";
 
         fd = open(device, O_RDWR);
         if (fd < 0)
@@ -1514,7 +1514,7 @@ int RDA5807M::checkI2C(uint8_t *addressArray)
     int idx = 0;
     int fd;
      qWarning("RDA5807M checkI2C");
-     const char *device = "/dev/i2c-7";
+     const char *device = "/dev/i2c-2";
 
      fd = open(device, O_RDWR);
      if (fd < 0)

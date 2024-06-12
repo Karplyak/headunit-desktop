@@ -32,7 +32,7 @@ class FMRadioPlugin : public QObject, PluginInterface
     Q_PLUGIN_METADATA(IID "org.viktorgino.headunit.fmradio" FILE "config.json")
     Q_INTERFACES(PluginInterface)
 
-    Q_PROPERTY(QVariantMap ports2 READ getPorts NOTIFY portsUpdated)
+    Q_PROPERTY(QVariantMap ports_fm READ getPorts NOTIFY portsUpdated)
     Q_PROPERTY(int lfrequency READ getFreq NOTIFY freqUpdated)
   //Q_PROPERTY(CRadioController* RadioController READ radioController NOTIFY radioControllerChanged)
     //Q_PROPERTY(FMRadioPlugin* FMRadio READ FMradio NOTIFY FMradioChanged)
@@ -95,4 +95,4 @@ private:
     }
 /**/};
 
-#endif // SAMPLEPLUGIN_H
+#endif // FMRADIOPLUGIN_H

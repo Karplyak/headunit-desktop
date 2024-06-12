@@ -33,7 +33,7 @@ ThemeRoot {
                 id: i2c_port
                 width: parent.width
                 label: "I2C Port"
-                values: pluginContext.ports
+                values: pluginContext.ports_fm
                 onValueChanged: {
                     pluginSettings.i2c_port = value
                 }

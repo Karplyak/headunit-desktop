@@ -108,11 +108,12 @@ void HUDSerialTest::setParameter(QString parameter, bool value){
     emit action("HVACPlugin::Update", QVariant::fromValue(m_ccCommandFrame));
 }
 void HUDSerialTest::setAudioParameter(QString parameter, int value){
+	qDebug() << "HUDSerialTest::setAudioParameter : " << parameter << " val "<< value;
     QVariantMap parameterMap;
     parameterMap["key"] = parameter;
     parameterMap["value"] = value;
     //emit action("AudioProcessorPlugin::VolumeUp", 0);
-    emit action("AudioProcessorPlugin::setAudioParameter",parameter);
+    emit action("AudioProcessorPlugin::setAudioParameter",parameterMap);
     emit action("HUDSerialPlugin::AudioControl", parameterMap);
 }
 void HUDSerialTest::setZoneParameter(QString zone, QString parameter, QVariant value) {

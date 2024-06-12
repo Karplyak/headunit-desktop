@@ -13,6 +13,7 @@
 #include <QJsonObject>
 #include <QCoreApplication>
 #include <plugininterface.h>
+#include <string>
 
 
 //need libi2c-dev
@@ -23,6 +24,11 @@ extern "C" {
     #include <unistd.h>
     #include <fcntl.h>
     #include <sys/ioctl.h>
+	
+	#include <unistd.h>
+	#include <sys/syscall.h>
+    #include <linux/reboot.h>
+	#include "wiringx.h"
 }
 
 
@@ -81,7 +87,7 @@ private:
     void startTimer();
     void stopTimer();
 
-    void readI2C();
+    void readI2C_status();
     void analyseResults();
 
     QVariantMap getPorts() {

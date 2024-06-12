@@ -11,12 +11,13 @@ TDA7418::TDA7418() {
     for(int i = 0; i <= Subwoofer; i++){
         setOutputChannelLevel((Audio_Output_Channels) i, 100);
     }
-    setMute(false);
+    
     //setVolume(90);
     setInput(Input_3);
     setInputGain(0);
 	writeByte(TDA7419_SPECTRUM, 0b11001010);
     writeByte(TDA7419_MIX_G_EFF, 0b11110000);
+	setMute(false);
 }
 
 void TDA7418::setInput(Audio_Input_Channels channel) {
@@ -174,7 +175,7 @@ void TDA7418::writeBytes(char registerAddress, int len, unsigned char* byteBuffe
 {
     int fd;
 	qWarning("TDA7418 writeBytes");
-    const char *device = "/dev/i2c-7";
+    const char *device = "/dev/i2c-2";
 
     fd = open(device, O_RDWR);
     if (fd < 0)
@@ -200,7 +201,7 @@ void TDA7418::writeByte(char registerAddress, unsigned char byteBuffer)
 {
     int fd;
 	qWarning("TDA7418 writeByte");
-    const char *device = "/dev/i2c-7";
+    const char *device = "/dev/i2c-2";
 
     fd = open(device, O_RDWR);
     if (fd < 0)
